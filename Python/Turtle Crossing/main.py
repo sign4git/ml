@@ -21,8 +21,12 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
     cars = CarManager()
+
+    # set initial moving distance
     if moving_distance == 0:
         moving_distance = cars.moving_distance
+
+    # add generated cars to the list if it doesn't collide with previous cars, else remove them
     for car in car_list:
         if car.distance(cars) <= 80:
             cars_not_colliding = False
@@ -32,6 +36,7 @@ while game_is_on:
     else:
         cars.hideturtle()
 
+    # Check if the player has crossed finish line. If yes update car moving speed and clear list of previous cars
     if player.ycor() >= player.finish_line:
         player.reset_turtle()
         moving_distance += cars.incremental_distance
@@ -40,6 +45,7 @@ while game_is_on:
             car.hideturtle()
         car_list.clear()
 
+    # check if the player has collided with the car
     for car in car_list:
         if player.ycor() == car.ycor() and player.distance(car) < 30:
             score.game_over()
