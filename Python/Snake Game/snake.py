@@ -51,3 +51,13 @@ class Snake:
 
     def extend_segment(self):
         self.add_segment(position=self.snake_segments[-1].position())
+
+    def clear_and_initialize_snake(self):
+        # move existing segment beyond the screen
+        for segment in self.snake_segments:
+            segment.goto(1000, 1000)
+        self.snake_segments.clear()
+
+        # initialize new snake
+        self.initialize_snake()
+        self.head = self.snake_segments[0]
