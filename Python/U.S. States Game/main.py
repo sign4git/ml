@@ -35,14 +35,8 @@ while len(guessed_states) < 50:
         new_turtle.write(f"{state_name}", align="center", font=("Arial", 8, "normal"))
         guessed_states.append(state_name)
 
-
 # export list of states to be learnt
-states_to_learn = []
-for state in state_list:
-    new_state = {}
-    if state not in guessed_states:
-        new_state["state"] = state
-        states_to_learn.append(new_state)
+states_to_learn = [state for state in state_list if state not in guessed_states]
 
-states_to_learn = pd.DataFrame(states_to_learn)
+states_to_learn = pd.DataFrame(states_to_learn, columns=["states"])
 states_to_learn.to_csv("states_to_learn.csv")
