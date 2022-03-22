@@ -25,8 +25,8 @@ for current_person in birthday_list:
         with open(letter, "r") as file:
             data = file.read()
             data = str(data).replace('[NAME]', current_person["name"])
-            with smtplib.SMTP("smtp.gmail.com") as connection:
-                connection.starttls()
-                connection.login(user=username, password=password)
-                connection.sendmail(from_addr=username, to_addrs=current_person['email'],
-                                    msg=f"Subject:Happy Birthday {current_person['name']}\n\n {data}")
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=username, password=password)
+            connection.sendmail(from_addr=username, to_addrs=current_person['email'],
+                                msg=f"Subject:Happy Birthday {current_person['name']}\n\n {data}")
