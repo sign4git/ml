@@ -27,7 +27,7 @@ class FlightSearch:
         return self.iata_code
 
     def get_destination_city_and_price(self, destination_city_code: str, source_city_code: str, from_date: str,
-                                       to_date: str):
+                                       to_date: str, destination_city: str):
         parameters = {
             "fly_from": source_city_code,
             "fly_to": destination_city_code,
@@ -47,16 +47,29 @@ class FlightSearch:
             data = response.json()["data"][0]
         except IndexError:
             print(f"No flights found for {destination_city_code}.")
-            return None
+            parameters["max_stopovers"] = 1
+            response = requests.get(TEQUILA_FLIGHT_SEARCH_ENDPOINT, params=parameters, headers=tequila_headers)
+            response.raise_for_status()
+            try:
+                data = response.json()["data"][0]
+                print(data)
+            except IndexError:
+                print(f"No flights found for {destination_city_code} with 1 stop over.")
+                return None
 
         flight_data = FlightData(
             price=data["price"],
             origin_city=data["route"][0]["cityFrom"],
             origin_airport=data["route"][0]["flyFrom"],
-            destination_city=data["route"][0]["cityTo"],
+            destination_city=destination_city,
             destination_airport=data["route"][0]["flyTo"],
             out_date=data["route"][0]["local_departure"].split("T")[0],
             return_date=data["route"][1]["local_departure"].split("T")[0]
         )
+
+        if parameters["max_stopovers"] >= 1:
+            flight_data.via_city = data["route"][0]["cityTo"]
+            flight_data.stop_overs = parameters["max_stopovers"]
+
         print(f"{flight_data.destination_city}: £{flight_data.price}")
         return flight_data
