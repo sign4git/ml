@@ -1,0 +1,79 @@
+div {
+  background-color: #F1F7E7;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  font-family: Merriweather, Festive;
+}
+
+h1 {
+  font-family: Ephesis, Festive;
+  color: #66BFBF;
+}
+
+.top-container {
+  position: relative;
+  padding-top: 100px;
+}
+
+.cloud1 {
+  position: absolute;
+  right: 300px;
+  top: 20px;
+}
+
+.cloud2 {
+  position: absolute;
+  left: 300px;
+}
+
+.myimage {
+  border-radius: 100%;
+}
+
+.skill-img1 {
+  width: 40%;
+  height: 40%;
+  float: left;
+  padding-right: 30px;
+}
+
+.skill-img2 {
+  width: 40%;
+  height: 40%;
+  float: right;
+  padding-left: 30px;
+}
+
+.name {
+  font-size: 5.625rem;
+  font-family: Sacramento;
+  padding-top: 50px;
+  margin: 0;
+}
+
+.programmer {
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: #66BFBF;
+}
+
+h2 {
+  color: #66BFBF;
+}
+
+a, h3 {
+  color: #11999E;
+}
+
+.skill-row{
+  width:50%;
+  margin:100px auto 100px auto;
+  text-align: left;
+}
+
+p{
+  line-height: 2;
+}
